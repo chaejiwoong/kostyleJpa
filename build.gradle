@@ -40,6 +40,10 @@ dependencies {
     //querydsl 추가
     implementation "com.querydsl:querydsl-jpa:5.0.0"
     implementation "com.querydsl:querydsl-apt:5.0.0"
+
+    //thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 }
 
 tasks.named('test') {
