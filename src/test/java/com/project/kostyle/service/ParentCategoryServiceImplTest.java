@@ -27,9 +27,6 @@ class ParentCategoryServiceImplTest {
     @Autowired
     private ParentCategoryService service;
 
-    @Autowired
-    private ParentCategoryRepository repository;
-
     @PersistenceContext
     private EntityManager em;
 

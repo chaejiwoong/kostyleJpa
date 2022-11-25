@@ -14,7 +14,7 @@ import java.util.List;
 public class Order extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ono;
 
     @ManyToOne(fetch = FetchType.LAZY)

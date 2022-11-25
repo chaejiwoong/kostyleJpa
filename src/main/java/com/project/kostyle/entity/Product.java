@@ -14,7 +14,7 @@ import java.util.List;
 public class Product extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pno;
 
     @ManyToOne(fetch = FetchType.LAZY)
