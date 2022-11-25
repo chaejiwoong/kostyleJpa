@@ -33,21 +33,21 @@ public class SubCategoryController {
     }
 
     // 상세 조회
-    @GetMapping("/{pcno}")
-    public ResponseEntity<SubCategoryDto> findOne(@PathVariable Long pcno) {
-        return new ResponseEntity<>(subCategoryService.findOne(pcno), HttpStatus.OK);
+    @GetMapping("/{scno}")
+    public ResponseEntity<SubCategoryDto> findOne(@PathVariable Long scno) {
+        return new ResponseEntity<>(subCategoryService.findOne(scno), HttpStatus.OK);
     }
 
     // 수정
-    @PutMapping("/{pcno}")
+    @PutMapping("/{scno}")
     public ResponseEntity<Long> update(@PathVariable Long scno, @RequestBody SubCategoryDto dto) {
-        dto.setPcno(scno);
+        dto.setScno(scno);
         return new ResponseEntity<>(subCategoryService.update(dto), HttpStatus.OK);
     }
 
     // 삭제
-    @DeleteMapping("/{pcno}")
-    public ResponseEntity<Long> delete(@PathVariable Long pcno) {
-        return new ResponseEntity<>(subCategoryService.delete(pcno), HttpStatus.OK);
+    @DeleteMapping("/{scno}")
+    public ResponseEntity<Long> delete(@PathVariable Long scno) {
+        return new ResponseEntity<>(subCategoryService.delete(scno), HttpStatus.OK);
     }
 }
