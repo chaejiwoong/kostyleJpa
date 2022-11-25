@@ -1,4 +1,6 @@
 package com.project.kostyle.service;
 
-public class SubCategoryServiceImpl implements SubCategoryService{
+public class SubCategoryServiceImpl implements SubCategoryService {
+
+
 }

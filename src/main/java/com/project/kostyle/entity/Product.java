@@ -32,5 +32,4 @@ public class Product extends BaseEntity{
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImg> imgs;
 
-    // 재고, 이미지 어케할지
 }

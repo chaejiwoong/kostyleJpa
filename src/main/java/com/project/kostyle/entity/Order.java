@@ -32,6 +32,6 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "orderDetail")
+    @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }
