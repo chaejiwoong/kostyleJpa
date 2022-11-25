@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Cart extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cpno;
 
     @ManyToOne(fetch = FetchType.LAZY)

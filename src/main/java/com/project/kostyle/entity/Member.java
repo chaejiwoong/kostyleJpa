@@ -14,7 +14,7 @@ import java.util.List;
 public class Member extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mno;
 
     private String email;

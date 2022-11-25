@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class OrderCancel extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ocno;
 
     @OneToOne(fetch = FetchType.LAZY)

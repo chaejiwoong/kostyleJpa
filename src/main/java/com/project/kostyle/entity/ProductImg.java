@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ProductImg extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pino;
 
     @ManyToOne(fetch = FetchType.LAZY)
