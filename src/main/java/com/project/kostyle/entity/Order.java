@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
     @Id
@@ -35,3 +36,4 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }
+
