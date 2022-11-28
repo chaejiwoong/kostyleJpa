@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
     @Id
