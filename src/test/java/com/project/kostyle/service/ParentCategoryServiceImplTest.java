@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest
+@TestPropertySource(locations = "classpath:application.properties")
 class ParentCategoryServiceImplTest {
 
     @Autowired

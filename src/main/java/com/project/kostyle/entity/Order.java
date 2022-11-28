@@ -30,6 +30,7 @@ public class Order extends BaseEntity {
     private Integer totalPrice;
 
     @Enumerated(EnumType.STRING)
+    //enum 타입 매핑
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order")
