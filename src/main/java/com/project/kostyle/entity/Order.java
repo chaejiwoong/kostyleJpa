@@ -11,10 +11,11 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ono;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,6 +33,6 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @OneToMany(mappedBy = "orderDetail")
+    @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }

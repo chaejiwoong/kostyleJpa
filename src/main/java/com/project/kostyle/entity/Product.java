@@ -1,6 +1,7 @@
 package com.project.kostyle.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Product extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pno;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,8 +30,8 @@ public class Product extends BaseEntity{
 
     private Integer amount;
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImg> imgs;
 
-    // 재고, 이미지 어케할지
 }
