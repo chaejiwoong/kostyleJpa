@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class OrderDetail {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long odno;
 
     @ManyToOne(fetch = FetchType.LAZY)

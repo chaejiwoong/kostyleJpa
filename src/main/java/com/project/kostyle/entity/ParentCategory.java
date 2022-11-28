@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -15,8 +16,12 @@ import javax.persistence.Id;
 public class ParentCategory extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pcno;
     
     private String name;
+
+    public void changeName(String name) {
+        this.name = name;
+    }
 }
