@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     //회원가입
     @Override
     public Long create(MemberDto memberDto) {
@@ -43,7 +44,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
         Member member = memberRepository.findByEmail(email);
 
         if(member ==null){
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException("해당 이메일을 찾을 수 없습니다.");
         }
         return User.builder()
                 .username(member.getEmail())

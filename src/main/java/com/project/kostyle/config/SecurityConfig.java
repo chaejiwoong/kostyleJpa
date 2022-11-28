@@ -1,6 +1,5 @@
 package com.project.kostyle.config;
 
-import com.project.kostyle.service.MemberService;
 import com.project.kostyle.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    MemberService memberService;
-
-    @Autowired
     MemberServiceImpl memberServiceImpl;
 
     //Http요청에 대한 보안 설정(페이지, 기능 권한 설정) (나중에 추가)
@@ -29,21 +25,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() //.antMatchers("/create/**").permitAll()
-                .anyRequest().permitAll();
+                .antMatchers("/create", "/login").permitAll() //누구나 접근 허용
+                .antMatchers("/admin").hasRole("ADMIN") //관리자만 허용
+                .anyRequest().authenticated();
 
-
-      /*  http.formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/") //로그인 성공 시
+        http.formLogin()
+                .loginProcessingUrl("/login")
                 .usernameParameter("email")
-                .failureUrl("/login/error")
+                .successHandler(new LoginSuccessHandler())
+                .failureHandler(new LoginFailureHandler())
                 .permitAll();
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true);*/
+                .invalidateHttpSession(true);
 
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
@@ -57,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberServiceImpl) //memberServiceImpl........아 뻐킹
+        auth.userDetailsService(memberServiceImpl)
                 .passwordEncoder(passwordEncoder());
     }
+
 }

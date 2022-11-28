@@ -4,6 +4,7 @@ import com.project.kostyle.dto.member.MemberDto;
 
 public interface MemberService{
 
-    public Long create(MemberDto memberDto);
+    public Long create(MemberDto memberDto); //회원가입
+
 
 }
