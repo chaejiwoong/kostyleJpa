@@ -27,7 +27,7 @@ public class MemberController {
         //검증 오류에 대한 예외처리
         try{
             memberService.create(memberDto);
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
         }catch (IllegalStateException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

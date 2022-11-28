@@ -27,11 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/**").permitAll() //.antMatchers("/create/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
-        http.formLogin()
+
+      /*  http.formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/") //로그인 성공 시
                 .usernameParameter("email")
@@ -41,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true);*/
 
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
