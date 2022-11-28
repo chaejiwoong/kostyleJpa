@@ -23,6 +23,10 @@ public class ProductDto {
     private Integer price;
     private Integer hitCount;
     private Integer amount;
+    // 대표상품 이미지
+    private ProductImgDto img;
+
+    // 상세용 이미지
     private List<ProductImgDto> imgs;
 
     public static Product toEntity(ProductDto dto, SubCategory subCategory) {
@@ -35,7 +39,7 @@ public class ProductDto {
                 .build();
     }
 
-    public static ProductDto of(Product entity, List<ProductImgDto> imgs) {
+    public static ProductDto of(Product entity,ProductImgDto img, List<ProductImgDto> imgs) {
         return ProductDto.builder()
                 .pno(entity.getPno())
                 .scno(entity.getSubCategory().getScno())
@@ -43,6 +47,7 @@ public class ProductDto {
                 .price(entity.getPrice())
                 .hitCount(entity.getHitCount())
                 .amount(entity.getAmount())
+                .img(img)
                 .imgs(imgs)
                 .build();
     }
