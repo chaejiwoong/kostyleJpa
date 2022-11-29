@@ -1,6 +1,8 @@
 package com.project.kostyle.config;
 
+import com.project.kostyle.repository.MemberRepository;
 import com.project.kostyle.service.MemberServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
     MemberServiceImpl memberServiceImpl;
 
     //Http요청에 대한 보안 설정(페이지, 기능 권한 설정) (나중에 추가)
@@ -27,12 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/main","/create", "/login/**", "/products").permitAll() //누구나 접근 허용
                 .antMatchers("/products/create").hasRole("ADMIN") //관리자만 허용
+                .antMatchers("/member/**").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated();
 
         http.formLogin()
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
-                .successHandler(new LoginSuccessHandler())
+                .successHandler(new LoginSuccessHandler(memberRepository))
                 .failureHandler(new LoginFailureHandler());
 
         http.logout()

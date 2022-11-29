@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
             throw new UsernameNotFoundException("해당 이메일을 찾을 수 없습니다.");
         }
         return User.builder()
-                .username(member.getEmail())
+                .username(String.valueOf(member.getMno()))
                 .password(member.getPassword())
                 .roles(member.getAuthority().toString())
                 .build();
