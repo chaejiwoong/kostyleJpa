@@ -25,20 +25,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/create", "/login").permitAll() //누구나 접근 허용
-                .antMatchers("/admin").hasRole("ADMIN") //관리자만 허용
+                .antMatchers("/main","/create", "/login/**", "/products").permitAll() //누구나 접근 허용
+                .antMatchers("/products/create").hasRole("ADMIN") //관리자만 허용
                 .anyRequest().authenticated();
 
         http.formLogin()
                 .loginProcessingUrl("/login")
                 .usernameParameter("email")
                 .successHandler(new LoginSuccessHandler())
-                .failureHandler(new LoginFailureHandler())
-                .permitAll();
+                .failureHandler(new LoginFailureHandler());
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
         http.exceptionHandling()

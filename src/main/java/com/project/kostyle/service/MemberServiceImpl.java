@@ -52,4 +52,9 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
                 .roles(member.getAuthority().toString())
                 .build();
     }
+
+
+
+
+
 }

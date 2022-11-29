@@ -15,6 +15,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
 
+        System.out.println("로그인 실패");
+
         response.sendRedirect("/login/error");
     }
 }
