@@ -1,7 +1,8 @@
 package com.project.kostyle.config;
 
-import com.project.kostyle.service.MemberService;
+import com.project.kostyle.repository.MemberRepository;
 import com.project.kostyle.service.MemberServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    MemberService memberService;
+    MemberRepository memberRepository;
 
     @Autowired
     MemberServiceImpl memberServiceImpl;
@@ -29,21 +30,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() //.antMatchers("/create/**").permitAll()
-                .anyRequest().permitAll();
+                .antMatchers("/main","/create", "/login/**", "/products").permitAll() //누구나 접근 허용
+                .antMatchers("/products/create").hasRole("ADMIN") //관리자만 허용
+                .antMatchers("/member/**").hasAnyRole("ADMIN","USER")
+                .anyRequest().authenticated();
 
-
-      /*  http.formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/") //로그인 성공 시
+        http.formLogin()
+                .loginProcessingUrl("/login")
                 .usernameParameter("email")
-                .failureUrl("/login/error")
-                .permitAll();
+                .successHandler(new LoginSuccessHandler(memberRepository))
+                .failureHandler(new LoginFailureHandler());
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
-                .invalidateHttpSession(true);*/
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
 
         http.exceptionHandling()
                 .accessDeniedPage("/denied");
@@ -57,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberServiceImpl) //memberServiceImpl........아 뻐킹
+        auth.userDetailsService(memberServiceImpl)
                 .passwordEncoder(passwordEncoder());
     }
+
 }

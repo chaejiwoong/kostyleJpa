@@ -28,6 +28,10 @@ public class ProductController {
     private final UploadService uploadService;
 
     // 등록
+    @GetMapping("/create")
+    public ResponseEntity<String> create(){
+        return new ResponseEntity<>("상품등록 페이지", HttpStatus.OK);
+    }
     @PostMapping("/create")
     public ResponseEntity<Long> create(ProductDto dto, MultipartFile[] multipartFiles) {
         List<ProductImgDto> imgs = uploadService.upload(multipartFiles);
