@@ -3,6 +3,7 @@ package com.project.kostyle.service;
 import com.project.kostyle.dto.member.AddressDto;
 import com.project.kostyle.entity.Member;
 import com.project.kostyle.repository.MemberRepository;
+import com.project.kostyle.util.SecurityUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import org.springframework.test.annotation.Rollback;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +35,7 @@ class AddressServiceImplTest {
     @Rollback
     public void create(){
 
-        //give
+        //given
         Member member = memberRepository.findByMno(2L);
         AddressDto addressDto = AddressDto.builder()
                 .address("가산동")
@@ -47,8 +50,23 @@ class AddressServiceImplTest {
 
         //then
         Assertions.assertThat(ano).isEqualTo(1L);
-
     }
+
+    @Test
+    @DisplayName("배송지 목록 테스트")
+    @Rollback
+    public void findAll(){
+
+        //given
+//        Long mno = SecurityUtil.getCurrentMemberId(); //2L
+//
+//        //when
+//        service.findAll();
+//        //then
+    }
+
+
+
 
 
 }

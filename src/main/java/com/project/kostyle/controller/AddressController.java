@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +31,25 @@ public class AddressController {
                 HttpStatus.OK);
 
     }
+
+    //배송지 목록
+    @GetMapping("/ajax")
+    public ResponseEntity<List<AddressDto>> addressList(){
+        return new ResponseEntity<List<AddressDto>>(addressService.findAll(), HttpStatus.OK);
+    }
+
+    //배송지 상세
+    @GetMapping("/ajax/{ano}")
+    public ResponseEntity<AddressDto> addressDetail(@PathVariable Long ano){
+        return new ResponseEntity<AddressDto>(addressService.addressDetail(ano), HttpStatus.OK);
+    }
+
+    //배송지 수정
+
+    //배송지 삭제
+
+    //기본 배송지 설정
+
+    //기본 배송지 해제
 
 }

@@ -44,4 +44,12 @@ public class MemberController {
         return "/loginForm";
     }
 
+    //인증 메일 발송
+
+    //이메일 찾기
+
+    //비밀번호 찾기
+
+
+
 }
