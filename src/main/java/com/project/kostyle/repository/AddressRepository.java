@@ -2,8 +2,25 @@ package com.project.kostyle.repository;
 
 import com.project.kostyle.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
+
+    //배송지 목록
+    /*@Query(value = "select a from Address a where a.member.mno = :mno", nativeQuery = true)
+    List<Address> findAll(@Param("mno") Long mno);*/
+
+    /*@Query(value = "select a from Address a inner join a.member m") //nativeQuery = true : MySQL 쿼리문 쓰고 싶을 때
+    List<Address> result(@Param("mno") Long mno);*/
+
+    List<Address> findByMember_Mno(Long mno); //jpa
+
+    //배송지 상세
+    Address findByAno(Long ano);
+
 
     /*// 기본 배송지 조회
     AddressVO findDefaultAddress(Long mno);
