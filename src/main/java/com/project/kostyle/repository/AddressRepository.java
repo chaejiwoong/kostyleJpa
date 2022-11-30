@@ -21,6 +21,10 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     //배송지 상세
     Address findByAno(Long ano);
 
+    //배송지 삭제
+    void deleteAddressByAno(Long ano);
+
+
 
     /*// 기본 배송지 조회
     AddressVO findDefaultAddress(Long mno);

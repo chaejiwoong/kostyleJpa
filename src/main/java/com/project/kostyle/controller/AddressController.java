@@ -45,8 +45,23 @@ public class AddressController {
     }
 
     //배송지 수정
+    @PatchMapping("/update/{ano}")
+    public ResponseEntity<String> update(@RequestBody AddressDto addressDto,
+                                                @PathVariable Long ano){
+
+        addressDto.setAno(ano);
+        addressService.update(addressDto);
+
+        return new ResponseEntity<String>("배송지 수정 완료", HttpStatus.OK);
+    }
+
 
     //배송지 삭제
+    @DeleteMapping("/delete/{ano}")
+    public ResponseEntity<String> delete(@PathVariable Long ano){
+        addressService.delete(ano);
+        return new ResponseEntity<String>("배송지 삭제 완료", HttpStatus.OK);
+    }
 
     //기본 배송지 설정
 

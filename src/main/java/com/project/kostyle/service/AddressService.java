@@ -16,6 +16,12 @@ public interface AddressService {
     //배송지 상세
     public AddressDto addressDetail(Long ano);
 
+    //배송지 수정
+    public Long update(AddressDto addressDto);
+
+    //배송지 삭제
+    public void delete(Long ano);
+
 
     // 기본 배송지 설정
     //void updateDefault(Long ano);
@@ -23,8 +29,6 @@ public interface AddressService {
 
     /*
 
-    // 배송지 수정
-    void updateAddress(AddressDTO dto);
 
     // 배송지 삭제
     void deleteAddress(Long ano);
