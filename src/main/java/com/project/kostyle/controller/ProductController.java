@@ -29,10 +29,10 @@ public class ProductController {
 
     // 등록
     @PostMapping("/create")
-    public ResponseEntity<Long> create(ProductDto dto, MultipartFile[] multipartFiles) {
+    public ResponseEntity<Long> create(@RequestBody ProductDto dto, MultipartFile[] multipartFiles) {
         List<ProductImgDto> imgs = uploadService.upload(multipartFiles);
         dto.setImgs(imgs);
-
+        System.out.println("dto" + dto);
         log.info("imgs = {}", imgs);
 
         return new ResponseEntity<>(productService.create(dto), HttpStatus.OK);

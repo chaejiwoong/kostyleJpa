@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() //.antMatchers("/create/**").permitAll()
+                .antMatchers("/create", "/order/**").permitAll()
                 .anyRequest().permitAll();
 
 
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberServiceImpl) //memberServiceImpl........아 뻐킹
+        auth.userDetailsService(memberServiceImpl)
                 .passwordEncoder(passwordEncoder());
     }
 }

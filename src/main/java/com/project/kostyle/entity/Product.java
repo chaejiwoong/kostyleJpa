@@ -30,6 +30,7 @@ public class Product extends BaseEntity{
     private Integer hitCount;
 
     private Integer amount;
+    //재고수량
 
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -49,5 +50,12 @@ public class Product extends BaseEntity{
 
     public void addHitCount() {
         this.hitCount += 1;
+    }
+    public void removeAmount(Integer amount) {
+        Integer restAmount = this.amount - amount;
+        if (restAmount < 0) {
+            throw new RuntimeException("상품의 재고가 부족 합니다.(현재 재고 수량: " + this.amount+ ")");
+        }
+        this.amount = restAmount;
     }
 }
