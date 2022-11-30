@@ -6,7 +6,6 @@ import com.project.kostyle.entity.Member;
 import com.project.kostyle.repository.AddressRepository;
 import com.project.kostyle.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +42,23 @@ public class AddressServiceImpl implements AddressService{
 
     //배송지 상세
     @Override
+    @Transactional(readOnly = true)
     public AddressDto addressDetail(Long ano) {
         return AddressDto.of(addressRepository.findByAno(ano));
+    }
+
+
+    //배송지 수정
+    @Override
+    public Long update(AddressDto addressDto){
+        Address address = addressRepository.findByAno(addressDto.getAno());
+        return address.update(addressDto);
+    }
+
+    //배송지 삭제
+    @Override
+    public void delete(Long ano) {
+        addressRepository.deleteAddressByAno(ano);
     }
 
     //기본 배송지 설정

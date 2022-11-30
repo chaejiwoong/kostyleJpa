@@ -34,6 +34,7 @@ public class Address extends BaseEntity{
 
     private String recipient;
 
+    //배송지 등록
     public static Address create(AddressDto addressDto, Member member){
 
         return Address.builder()
@@ -45,5 +46,21 @@ public class Address extends BaseEntity{
                 .recipient(addressDto.getRecipient())
                 .build();
     }
+
+    //배송지 수정
+    public Long update(AddressDto addressDto){
+
+        this.address = addressDto.getAddress();
+        this.tel = addressDto.getTel();
+        this.name = addressDto.getName();
+        this.isDefault = addressDto.isDefault();
+        this.recipient = addressDto.getRecipient();
+
+        return this.ano;
+    }
+
+    //배송지 삭제
+
+
 
 }
