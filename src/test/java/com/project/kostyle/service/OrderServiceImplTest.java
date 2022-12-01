@@ -45,8 +45,7 @@ class OrderServiceImplTest {
 
 
     public Product callProduct() {
-        Long pno = 1L;
-        return productRepository.findByPno(pno);
+        return productRepository.findByPno(1L);
     }
     public Member callMember() {
         String email = "ww@naver.com";
@@ -60,7 +59,7 @@ class OrderServiceImplTest {
         Member member = callMember();
 
         OrderDto orderDto = OrderDto.builder()
-                .amount(10)
+                .amount(1)
                 .productId(product.getPno())
                 .build();
 
@@ -68,6 +67,7 @@ class OrderServiceImplTest {
 
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
+
 
         List<OrderDetail> orderDetails = order.getOrderDetails();
 

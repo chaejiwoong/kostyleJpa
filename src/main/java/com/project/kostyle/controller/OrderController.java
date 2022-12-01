@@ -31,7 +31,6 @@ public class OrderController {
             for (FieldError fieldError : fieldErrors) {
                 sb.append(fieldError.getDefaultMessage());
             }
-
             return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
 
@@ -43,7 +42,6 @@ public class OrderController {
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 }

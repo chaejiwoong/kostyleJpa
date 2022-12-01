@@ -38,7 +38,7 @@ class MemberServiceImplTest {
         Long mno = service.create(memberDto);
 
         //then
-        Assertions.assertThat(mno).isEqualTo(1L);
+        Assertions.assertThat(mno).isEqualTo(2L);
     }
 
 

@@ -29,21 +29,19 @@ public class OrderDetail extends BaseEntity{
 
     private Integer price;
 
-    public static OrderDetail createOrderDetail(Product product, Integer amount) {
+    public static OrderDetail createOrderDetail(Product product, Order order, Integer amount) {
         OrderDetail orderDetail = OrderDetail.builder()
+                .order(order)
                 .product(product)
                 .amount(amount)
+                .price(amount* product.getPrice())
                 .build();
         product.removeAmount(amount);
         return orderDetail;
     }
 
-//    public static OrderDetail createOrderDetail(Product product, Integer amount) {
-//    }
-
-    // 주문 가격과
     public int getTotalPrice() {
-        return amount*price;
+        return amount * price;
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Builder
-@ToString
+//@ToString
 @DynamicInsert
 public class Member extends BaseEntity{
 
@@ -47,7 +47,6 @@ public class Member extends BaseEntity{
                 .password(passwordEncoder.encode(memberDto.getPassword()))
                 .authority(Role.USER)
                 .build();
-
         return member;
     }
 

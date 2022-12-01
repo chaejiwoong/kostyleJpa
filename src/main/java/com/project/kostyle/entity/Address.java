@@ -1,6 +1,9 @@
 package com.project.kostyle.entity;
 
+import com.project.kostyle.dto.member.AddressDto;
+import com.project.kostyle.dto.member.MemberDto;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -9,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Builder
-@ToString
+//@ToString
 public class Address extends BaseEntity{
 
     @Id
@@ -30,5 +33,17 @@ public class Address extends BaseEntity{
     private boolean isDefault;
 
     private String recipient;
+
+    public static Address create(AddressDto addressDto, Member member){
+
+        return Address.builder()
+                .member(member)
+                .address(addressDto.getAddress())
+                .tel(addressDto.getTel())
+                .name(addressDto.getName())
+                .isDefault(addressDto.isDefault())
+                .recipient(addressDto.getRecipient())
+                .build();
+    }
 
 }

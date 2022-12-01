@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Builder
-@ToString
+//@ToString
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
@@ -47,11 +47,12 @@ public class Order extends BaseEntity {
     }
 
     //DB에 직접 값이 들어가짐
-    public static Order createOrder(Member member, List<OrderDetail> orderDetailList) {
+    public static Order createOrder(Member member, Address address, List<OrderDetail> orderDetailList) {
         Order order = Order.builder()
-                .payment("카드")
                 .member(member)
-                .totalPrice(20000)
+                .address(address)
+                .payment("카드")
+                .totalPrice(10000)
                 .status(OrderStatus.ORDER)
                 .build();
         for (OrderDetail orderDetail : orderDetailList) {

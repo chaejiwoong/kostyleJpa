@@ -2,18 +2,13 @@ package com.project.kostyle.service;
 
 import com.project.kostyle.dto.order.OrderDetailDto;
 import com.project.kostyle.dto.order.OrderDto;
-import com.project.kostyle.entity.Member;
-import com.project.kostyle.entity.Order;
-import com.project.kostyle.entity.OrderDetail;
-import com.project.kostyle.entity.Product;
-import com.project.kostyle.repository.MemberRepository;
-import com.project.kostyle.repository.OrderDetailRepository;
-import com.project.kostyle.repository.OrderRepository;
-import com.project.kostyle.repository.ProductRepository;
+import com.project.kostyle.entity.*;
+import com.project.kostyle.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +22,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
 
+    private final AddressRepository addressRepository;
 
     @Override
     public Long order(OrderDto orderDto, String email) {
@@ -34,13 +30,18 @@ public class OrderServiceImpl implements OrderService{
                 .orElseThrow(EntityNotFoundException::new);
         Member member = memberRepository.findByEmail(email);
 
+        Address address = addressRepository.findById(1L)
+                .orElseThrow(EntityExistsException::new);
+
+
+
         List<OrderDetail> orderDetailList = new ArrayList<>();
 
-        OrderDetail orderDetail = OrderDetail.createOrderDetail(product, orderDto.getAmount());
-        orderDetailList.add(orderDetail);
-
-        Order order = Order.createOrder(member, orderDetailList);
+        Order order = Order.createOrder(member, address, orderDetailList);
         orderRepository.save(order);
+
+        OrderDetail orderDetail = OrderDetail.createOrderDetail(product,  order, orderDto.getAmount());
+        orderDetailList.add(orderDetail);
 
         return order.getOno();
     }

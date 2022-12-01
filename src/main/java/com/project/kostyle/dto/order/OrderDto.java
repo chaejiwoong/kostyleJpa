@@ -16,12 +16,6 @@ import java.util.List;
 @Setter
 @Builder
 public class OrderDto {
-    private Member member;
-    private Address address;
-    private String payment;
-    private Integer totalPrice;
-    private OrderStatus status;
-    private List<OrderDetail> orderDetails;
     //상품에 대한 아이디
     private Long productId;
 
